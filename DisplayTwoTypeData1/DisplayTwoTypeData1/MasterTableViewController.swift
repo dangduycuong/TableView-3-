@@ -11,7 +11,7 @@ import UIKit
 class MasterTableViewController: UITableViewController {
 
     @IBOutlet weak var noDataImageView: UIImageView!
-    @IBOutlet weak var blackView: UIView!
+    @IBOutlet var blackView: UIView!
     
     @IBOutlet weak var switchOutlet: UISwitch!
     
