@@ -16,7 +16,9 @@ class PhatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        phatTextField.delegate = self
+        
+        title = "Post Notification Center"
     }
     
 //    deinit {
@@ -47,4 +49,22 @@ class PhatViewController: UIViewController {
     }
     */
 
+}
+
+extension PhatViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        var data = DataPost()
+        
+        if textField.text == "" {
+            data.result = .other
+            data.text = "null"
+        } else {
+            data.result = .success
+            data.text = textField.text
+        }
+        
+        NotificationCenter.default.post(name: .testKey, object: data)
+        navigationController?.popViewController(animated: true)
+        return true
+    }
 }

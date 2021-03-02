@@ -10,16 +10,27 @@ import UIKit
 
 struct Headline {
     // ...
-    var id: Int
-    var title: String
-    var text: String
-    var image: String
+    var id: Int?
+    var title: String?
+    var text: String?
+    var image: String?
 }
 
 class HeadlineTableViewCell: UITableViewCell {
     @IBOutlet weak var headlineTitleLabel: UILabel!
     @IBOutlet weak var headlineTextLabel: UILabel!
     @IBOutlet weak var headlineImageView: UIImageView!
+    
+    var headline = Headline()
+    
+    func fillData() {
+        headlineTitleLabel?.text = headline.title
+        headlineTextLabel?.text = headline.text
+        if let name = headline.image {
+            headlineImageView?.image = UIImage(named: name)
+        }
+    }
+    
 }
 
 class TableViewController: UITableViewController {
@@ -59,9 +70,9 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath) as! HeadlineTableViewCell
         
         let headline = headlines[indexPath.row]
-        cell.headlineTitleLabel?.text = headline.title
-        cell.headlineTextLabel?.text = headline.text
-        cell.headlineImageView?.image = UIImage(named: headline.image)
+        
+        cell.headline = headline
+        cell.fillData()
         
         return cell
     }
